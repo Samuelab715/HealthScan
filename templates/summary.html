@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Information Summary</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Medical Information Summary</h1>
+            <p class="subtitle">Review your submitted medical information</p>
+        </header>
+
+        <div class="summary-container">
+            <!-- Personal Information Section -->
+            <section class="summary-section">
+                <h2>Personal Information</h2>
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <label>Full Name:</label>
+                        <span>{{ data.name if data.name else 'Not provided' }}</span>
+                    </div>
+                    <div class="summary-item">
+                        <label>Age:</label>
+                        <span>{{ data.age if data.age else 'Not provided' }}</span>
+                    </div>
+                    <div class="summary-item">
+                        <label>Gender:</label>
+                        <span>{{ data.gender.title() if data.gender else 'Not provided' }}</span>
+                    </div>
+                    <div class="summary-item">
+                        <label>Contact:</label>
+                        <span>{{ data.contact if data.contact else 'Not provided' }}</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Medical Information Section -->
+            <section class="summary-section">
+                <h2>Medical Information</h2>
+                
+                <div class="summary-item">
+                    <label>Underlying Diseases:</label>
+                    <div class="list-values">
+                        {% if data.diseases %}
+                            {% for disease in data.diseases %}
+                                <span class="tag">{{ disease.replace('_', ' ').title() }}</span>
+                            {% endfor %}
+                        {% else %}
+                            <span class="no-data">None selected</span>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="summary-item">
+                    <label>Allergies:</label>
+                    <div class="list-values">
+                        {% if data.allergies %}
+                            {% for allergy in data.allergies %}
+                                <span class="tag">{{ allergy.replace('_', ' ').title() }}</span>
+                            {% endfor %}
+                        {% else %}
+                            <span class="no-data">None selected</span>
+                        {% endif %}
+                    </div>
+                </div>
+
+                {% if data.pregnancy and data.gender == 'female' %}
+                <div class="summary-item">
+                    <label>Pregnancy Status:</label>
+                    <span>{{ data.pregnancy.title() }}</span>
+                </div>
+                {% endif %}
+            </section>
+
+            <!-- Vital Signs Section -->
+            <section class="summary-section">
+                <h2>Vital Signs</h2>
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <label>Blood Pressure:</label>
+                        <span>{{ data.blood_pressure if data.blood_pressure else 'Not provided' }}</span>
+                    </div>
+                    <div class="summary-item">
+                        <label>Temperature:</label>
+                        <span>{{ data.temperature + '°F' if data.temperature else 'Not provided' }}</span>
+                    </div>
+                    <div class="summary-item">
+                        <label>Heart Rate:</label>
+                        <span>{{ data.heart_rate + ' BPM' if data.heart_rate else 'Not provided' }}</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="form-actions">
+            <a href="{{ url_for('index') }}" class="submit-btn">Submit New Form</a>
+        </div>
+
+        <!-- Summary timestamp -->
+        <div class="timestamp">
+            <p>Summary generated on: <span id="current-date"></span></p>
+        </div>
+    </div>
+
+    <script>
+        // Display current date and time
+        document.addEventListener('DOMContentLoaded', function() {
+            const now = new Date();
+            const options = { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric', 
+                hour: '2-digit', 
+                minute: '2-digit' 
+            };
+            document.getElementById('current-date').textContent = now.toLocaleDateString('en-US', options);
+        });
+    </script>
+</body>
+</html>

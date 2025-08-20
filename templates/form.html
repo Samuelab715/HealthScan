@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Information Collection Form</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Medical Information Collection Form</h1>
+            <p class="subtitle">Please fill out the information below for your medical assessment</p>
+        </header>
+
+        <!-- Flash messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="flash-message flash-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <form action="{{ url_for('submit_form') }}" method="POST" id="medicalForm">
+            <!-- Personal Information Section (Optional) -->
+            <section class="form-section">
+                <h2>Personal Information <span class="optional">(Optional)</span></h2>
+                
+                <div class="form-group">
+                    <label for="name">Full Name:</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your full name">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="age">Age:</label>
+                        <input type="number" id="age" name="age" min="0" max="150" placeholder="Age">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="gender">Gender:</label>
+                        <select id="gender" name="gender" onchange="togglePregnancyField()">
+                            <option value="">Select Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="contact">Contact Information:</label>
+                    <input type="text" id="contact" name="contact" placeholder="Phone number or email">
+                </div>
+            </section>
+
+            <!-- Medical Information Section -->
+            <section class="form-section">
+                <h2>Medical Information</h2>
+
+                <!-- Underlying Diseases -->
+                <div class="form-group">
+                    <label>Underlying Diseases:</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="diseases" value="diabetes">
+                            <span class="checkmark"></span>
+                            Diabetes
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="diseases" value="hypertension">
+                            <span class="checkmark"></span>
+                            Hypertension
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="diseases" value="asthma">
+                            <span class="checkmark"></span>
+                            Asthma
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="diseases" value="heart_disease">
+                            <span class="checkmark"></span>
+                            Heart Disease
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="diseases" value="none" id="diseases-none" onchange="handleNoneSelection('diseases')">
+                            <span class="checkmark"></span>
+                            None
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Allergies -->
+                <div class="form-group">
+                    <label>Allergies:</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="allergies" value="penicillin">
+                            <span class="checkmark"></span>
+                            Penicillin
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="allergies" value="sulfa_drugs">
+                            <span class="checkmark"></span>
+                            Sulfa drugs
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="allergies" value="peanuts">
+                            <span class="checkmark"></span>
+                            Peanuts
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="allergies" value="seafood">
+                            <span class="checkmark"></span>
+                            Seafood
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="allergies" value="none" id="allergies-none" onchange="handleNoneSelection('allergies')">
+                            <span class="checkmark"></span>
+                            None
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Vital Signs -->
+                <h3>Vital Signs <span class="optional">(Optional)</span></h3>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="blood_pressure">Blood Pressure:</label>
+                        <input type="text" id="blood_pressure" name="blood_pressure" placeholder="e.g., 120/80">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="temperature">Temperature (°F):</label>
+                        <input type="number" id="temperature" name="temperature" step="0.1" min="90" max="110" placeholder="98.6">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="heart_rate">Heart Rate (BPM):</label>
+                        <input type="number" id="heart_rate" name="heart_rate" min="40" max="200" placeholder="72">
+                    </div>
+                </div>
+
+                <!-- Pregnancy Status (Conditional) -->
+                <div class="form-group" id="pregnancy-field" style="display: none;">
+                    <label for="pregnancy">Pregnancy Status:</label>
+                    <select id="pregnancy" name="pregnancy">
+                        <option value="">Select Status</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+            </section>
+
+            <div class="form-actions">
+                <button type="submit" class="submit-btn">Submit Medical Information</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Toggle pregnancy field visibility based on gender selection
+        function togglePregnancyField() {
+            const gender = document.getElementById('gender').value;
+            const pregnancyField = document.getElementById('pregnancy-field');
+            
+            if (gender === 'female') {
+                pregnancyField.style.display = 'block';
+            } else {
+                pregnancyField.style.display = 'none';
+                document.getElementById('pregnancy').value = '';
+            }
+        }
+
+        // Handle "None" selection logic for checkboxes
+        function handleNoneSelection(groupName) {
+            const noneCheckbox = document.getElementById(groupName + '-none');
+            const otherCheckboxes = document.querySelectorAll(`input[name="${groupName}"]:not(#${groupName}-none)`);
+            
+            if (noneCheckbox.checked) {
+                // If "None" is checked, uncheck all others
+                otherCheckboxes.forEach(checkbox => {
+                    checkbox.checked = false;
+                });
+            } else {
+                // If any other is checked, uncheck "None"
+                otherCheckboxes.forEach(checkbox => {
+                    checkbox.addEventListener('change', function() {
+                        if (this.checked) {
+                            noneCheckbox.checked = false;
+                        }
+                    });
+                });
+            }
+        }
+
+        // Initialize event listeners for checkbox groups
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add event listeners for diseases checkboxes
+            const diseaseCheckboxes = document.querySelectorAll('input[name="diseases"]:not(#diseases-none)');
+            diseaseCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        document.getElementById('diseases-none').checked = false;
+                    }
+                });
+            });
+
+            // Add event listeners for allergies checkboxes
+            const allergyCheckboxes = document.querySelectorAll('input[name="allergies"]:not(#allergies-none)');
+            allergyCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        document.getElementById('allergies-none').checked = false;
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -24,6 +24,10 @@
             {% endif %}
         {% endwith %}
 
+        <nav class="breadcrumb">
+            <a href="{{ url_for('index') }}">Home</a> > Medical Form
+        </nav>
+
         <form action="{{ url_for('submit_form') }}" method="POST" id="medicalForm">
             <!-- Personal Information Section (Optional) -->
             <section class="form-section">

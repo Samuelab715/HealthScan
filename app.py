@@ -11,6 +11,11 @@ app.secret_key = os.environ.get("SESSION_SECRET", "default_secret_key_for_develo
 
 @app.route('/')
 def index():
+    """Display the homepage with link to medical form"""
+    return render_template('index.html')
+
+@app.route('/form')
+def medical_form():
     """Display the medical information collection form"""
     return render_template('form.html')
 
@@ -45,7 +50,7 @@ def submit_form():
         # Basic validation
         if not form_data['diseases'] and not form_data['allergies']:
             flash('Please select at least one option for underlying diseases or allergies.', 'error')
-            return redirect(url_for('index'))
+            return redirect(url_for('medical_form'))
         
         # Log the submission
         app.logger.info(f"Form submitted with data: {form_data}")
@@ -55,7 +60,7 @@ def submit_form():
     except Exception as e:
         app.logger.error(f"Error processing form submission: {str(e)}")
         flash('An error occurred while processing your submission. Please try again.', 'error')
-        return redirect(url_for('index'))
+        return redirect(url_for('medical_form'))
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)

@@ -95,8 +95,13 @@
             </section>
         </div>
 
+        <nav class="breadcrumb">
+            <a href="{{ url_for('index') }}">Home</a> > <a href="{{ url_for('medical_form') }}">Medical Form</a> > Summary
+        </nav>
+
         <div class="form-actions">
-            <a href="{{ url_for('index') }}" class="submit-btn">Submit New Form</a>
+            <a href="{{ url_for('medical_form') }}" class="submit-btn">Submit New Form</a>
+            <a href="{{ url_for('index') }}" class="submit-btn secondary-btn">Back to Home</a>
         </div>
 
         <!-- Summary timestamp -->

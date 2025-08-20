@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automated Diagnostics System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Automated Diagnostics System</h1>
+            <p class="subtitle">Welcome to our medical information collection platform</p>
+        </header>
+
+        <div class="homepage-content">
+            <section class="welcome-section">
+                <h2>Medical Assessment Portal</h2>
+                <p>Our automated diagnostics system helps healthcare professionals collect and organize patient medical information efficiently. Please provide your medical details through our secure form to assist with your healthcare assessment.</p>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>Secure Data Collection</h3>
+                        <p>Your medical information is handled with the utmost security and confidentiality.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Comprehensive Assessment</h3>
+                        <p>Collect vital signs, medical history, allergies, and underlying conditions in one place.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Instant Summary</h3>
+                        <p>Get an organized summary of your submitted medical information immediately.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="action-section">
+                <h2>Ready to Begin?</h2>
+                <p>Click the button below to start your medical information collection process.</p>
+                
+                <div class="form-actions">
+                    <a href="{{ url_for('medical_form') }}" class="submit-btn">Start Medical Assessment</a>
+                </div>
+            </section>
+        </div>
+
+        <footer class="homepage-footer">
+            <p>Please ensure all information provided is accurate for the best medical assessment results.</p>
+        </footer>
+    </div>
+</body>
+</html>

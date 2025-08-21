@@ -117,46 +117,97 @@ def diagnose():
 def generate_diagnosis(medical_data, symptoms):
     """Generate diagnostic recommendations based on medical info and symptoms"""
     
-    # Define common conditions and their associated symptoms
+    # Define Ghana-relevant conditions and their associated symptoms
     conditions = {
+        'Malaria': {
+            'symptoms': ['high_fever', 'chills_rigors', 'sweating', 'severe_headache', 'body_aches', 'nausea', 'vomiting', 'severe_fatigue'],
+            'severity': 'Moderate to Severe',
+            'recommendations': [
+                'Seek immediate medical attention for proper diagnosis and treatment',
+                'Get tested for malaria parasites (rapid diagnostic test or microscopy)',
+                'Take prescribed antimalarial medication as directed',
+                'Stay hydrated and rest in a cool environment',
+                'Use mosquito nets and repellents to prevent reinfection',
+                'Monitor for severe complications (cerebral malaria signs)'
+            ]
+        },
+        'Typhoid Fever': {
+            'symptoms': ['high_fever', 'severe_headache', 'abdominal_pain', 'rose_colored_spots', 'diarrhea', 'constipation', 'severe_fatigue', 'loss_of_appetite'],
+            'severity': 'Severe',
+            'recommendations': [
+                'Seek immediate medical attention for proper diagnosis',
+                'Get blood culture or Widal test for confirmation',
+                'Take prescribed antibiotics for full duration',
+                'Maintain strict hygiene and safe water/food practices',
+                'Stay well hydrated and get adequate nutrition',
+                'Isolate to prevent spread to others'
+            ]
+        },
+        'Cholera': {
+            'symptoms': ['severe_watery_diarrhea', 'severe_vomiting', 'dehydration', 'abdominal_cramps', 'rapid_heartbeat'],
+            'severity': 'Severe',
+            'recommendations': [
+                'Seek immediate emergency medical care',
+                'Start oral rehydration solution (ORS) immediately',
+                'Get intravenous fluids if severely dehydrated',
+                'Take prescribed antibiotics if recommended',
+                'Maintain strict hygiene to prevent spread',
+                'Report to health authorities for public health response'
+            ]
+        },
+        'Gastroenteritis (Food Poisoning)': {
+            'symptoms': ['nausea', 'vomiting', 'diarrhea', 'stomach_pain', 'abdominal_cramps', 'fatigue'],
+            'severity': 'Mild to Moderate',
+            'recommendations': [
+                'Stay hydrated with ORS or clean water',
+                'Follow BRAT diet (Bananas, Rice, Applesauce, Toast)',
+                'Rest and avoid dairy products temporarily',
+                'Seek medical attention if symptoms persist beyond 3 days',
+                'Practice food safety and proper hand hygiene'
+            ]
+        },
         'Common Cold': {
-            'symptoms': ['runny_nose', 'sneezing', 'sore_throat', 'mild_cough', 'mild_fatigue'],
+            'symptoms': ['runny_nose', 'sneezing', 'sore_throat', 'mild_cough', 'fatigue', 'headache'],
             'severity': 'Mild',
             'recommendations': [
-                'Rest and stay hydrated',
-                'Use over-the-counter cold medications as needed',
+                'Rest and stay well hydrated',
+                'Use steam inhalation for nasal congestion',
                 'Gargle with warm salt water for sore throat',
-                'Should resolve within 7-10 days'
+                'Should resolve within 7-10 days',
+                'Avoid close contact with others to prevent spread'
             ]
         },
         'Influenza (Flu)': {
-            'symptoms': ['fever', 'body_aches', 'fatigue', 'headache', 'dry_cough', 'chills'],
+            'symptoms': ['fever', 'body_aches', 'severe_fatigue', 'headache', 'dry_cough', 'chills'],
             'severity': 'Moderate',
             'recommendations': [
                 'Rest and get plenty of fluids',
-                'Consider antiviral medication if within 48 hours of symptom onset',
-                'Monitor temperature and seek medical attention if symptoms worsen',
-                'Isolation recommended to prevent spread'
+                'Consider antiviral medication if within 48 hours',
+                'Monitor temperature and seek care if symptoms worsen',
+                'Isolation recommended to prevent spread',
+                'Get annual flu vaccination for prevention'
             ]
         },
         'Upper Respiratory Infection': {
-            'symptoms': ['sore_throat', 'runny_nose', 'mild_cough', 'sneezing', 'nasal_congestion'],
+            'symptoms': ['sore_throat', 'runny_nose', 'mild_cough', 'sneezing', 'nasal_congestion', 'headache'],
             'severity': 'Mild to Moderate',
             'recommendations': [
                 'Rest and stay hydrated',
-                'Use decongestants or saline rinses for nasal congestion',
+                'Use steam inhalation for congestion relief',
                 'Warm beverages may help soothe throat',
-                'See a doctor if symptoms persist beyond 10 days'
+                'See a doctor if symptoms persist beyond 10 days',
+                'Maintain good hygiene to prevent spread'
             ]
         },
-        'Gastroenteritis': {
-            'symptoms': ['nausea', 'vomiting', 'diarrhea', 'stomach_pain', 'mild_fatigue'],
-            'severity': 'Mild to Moderate',
+        'Dehydration/Heat Illness': {
+            'symptoms': ['dehydration', 'rapid_heartbeat', 'confusion', 'severe_fatigue', 'headache'],
+            'severity': 'Moderate to Severe',
             'recommendations': [
-                'Stay hydrated with clear fluids',
-                'Follow BRAT diet (Bananas, Rice, Applesauce, Toast)',
-                'Rest and avoid dairy products temporarily',
-                'Seek medical attention if dehydration occurs'
+                'Move to a cool, shaded area immediately',
+                'Drink ORS or clean water in small, frequent sips',
+                'Seek medical attention if symptoms are severe',
+                'Avoid strenuous activity during hot weather',
+                'Wear light-colored, loose clothing in hot weather'
             ]
         },
         'Allergic Reaction': {
@@ -166,7 +217,8 @@ def generate_diagnosis(medical_data, symptoms):
                 'Avoid known allergens',
                 'Use antihistamines as directed',
                 'Apply cool compresses to affected skin areas',
-                'Seek immediate medical attention for severe reactions'
+                'Seek immediate medical attention for severe reactions',
+                'Keep a record of triggers for future prevention'
             ]
         }
     }

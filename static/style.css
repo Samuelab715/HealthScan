@@ -485,6 +485,48 @@ input::placeholder {
     background-color: #5a6268;
 }
 
+/* Emergency warning styles */
+.emergency-warning {
+    background-color: #fff5f5;
+    border: 2px solid #e53e3e;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.emergency-warning h3 {
+    color: #e53e3e;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+
+.emergency-warning ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.emergency-warning li {
+    padding: 8px 0;
+    padding-left: 20px;
+    position: relative;
+    color: #c53030;
+    line-height: 1.6;
+    font-weight: 500;
+}
+
+.emergency-warning li:before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: #e53e3e;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
 /* Diagnosis page styles */
 .diagnosis-container {
     margin-bottom: 40px;

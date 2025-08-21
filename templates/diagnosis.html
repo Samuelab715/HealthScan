@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnostic Results - Automated Diagnostic System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Diagnostic Results</h1>
+            <p class="subtitle">Based on your medical information and selected symptoms</p>
+        </header>
+
+        <nav class="breadcrumb">
+            <a href="{{ url_for('index') }}">Home</a> > <a href="{{ url_for('medical_form') }}">Medical Form</a> > Symptoms > Diagnosis
+        </nav>
+
+        <div class="diagnosis-container">
+            <!-- Primary Diagnosis -->
+            {% if diagnosis.primary_condition %}
+            <section class="diagnosis-section primary-diagnosis">
+                <h2>Primary Diagnosis</h2>
+                <div class="diagnosis-card">
+                    <div class="diagnosis-header">
+                        <h3>{{ diagnosis.primary_condition.name }}</h3>
+                        <div class="confidence-badge">
+                            <span class="confidence-level">{{ "%.0f"|format(diagnosis.primary_condition.confidence) }}% Confidence</span>
+                            <span class="severity-level severity-{{ diagnosis.primary_condition.severity.lower().replace(' ', '-') }}">{{ diagnosis.primary_condition.severity }}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="recommendations">
+                        <h4>Recommended Actions:</h4>
+                        <ul>
+                            {% for recommendation in diagnosis.primary_condition.recommendations %}
+                                <li>{{ recommendation }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            {% endif %}
+
+            <!-- Alternative Conditions -->
+            {% if diagnosis.alternative_conditions %}
+            <section class="diagnosis-section alternative-diagnosis">
+                <h2>Alternative Considerations</h2>
+                <div class="alternatives-grid">
+                    {% for condition in diagnosis.alternative_conditions %}
+                    <div class="alternative-card">
+                        <h4>{{ condition.name }}</h4>
+                        <div class="alternative-details">
+                            <span class="confidence-small">{{ "%.0f"|format(condition.confidence) }}% match</span>
+                            <span class="severity-small severity-{{ condition.severity.lower().replace(' ', '-') }}">{{ condition.severity }}</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+            {% endif %}
+
+            <!-- Risk Factors -->
+            {% if diagnosis.risk_factors %}
+            <section class="diagnosis-section risk-factors">
+                <h2>Important Considerations</h2>
+                <div class="risk-alerts">
+                    {% for risk in diagnosis.risk_factors %}
+                    <div class="risk-alert">
+                        <span class="risk-icon">⚠️</span>
+                        <span class="risk-text">{{ risk }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+            {% endif %}
+
+            <!-- Selected Symptoms Summary -->
+            <section class="diagnosis-section symptoms-summary">
+                <h2>Your Reported Symptoms</h2>
+                <div class="symptoms-list">
+                    {% for symptom in symptoms %}
+                    <span class="symptom-tag">{{ symptom.replace('_', ' ').title() }}</span>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <!-- General Recommendations -->
+            <section class="diagnosis-section general-recommendations">
+                <h2>General Recommendations</h2>
+                <div class="general-advice">
+                    <ul>
+                        {% for recommendation in diagnosis.general_recommendations %}
+                        <li>{{ recommendation }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Medical Disclaimer -->
+            <section class="diagnosis-section disclaimer">
+                <div class="disclaimer-box">
+                    <h3>⚠️ Important Medical Disclaimer</h3>
+                    <p>This automated diagnostic tool is for informational purposes only and should not replace professional medical advice, diagnosis, or treatment. Always consult with qualified healthcare providers for proper medical evaluation and treatment decisions.</p>
+                </div>
+            </section>
+        </div>
+
+        <div class="form-actions">
+            <a href="{{ url_for('medical_form') }}" class="submit-btn">Start New Assessment</a>
+            <button onclick="window.print()" class="submit-btn secondary-btn">Print Results</button>
+            <a href="{{ url_for('index') }}" class="submit-btn secondary-btn">Back to Home</a>
+        </div>
+
+        <!-- Timestamp -->
+        <div class="timestamp">
+            <p>Diagnosis generated on: <span id="current-date"></span></p>
+        </div>
+    </div>
+
+    <script>
+        // Display current date and time
+        document.addEventListener('DOMContentLoaded', function() {
+            const now = new Date();
+            const options = { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric', 
+                hour: '2-digit', 
+                minute: '2-digit' 
+            };
+            document.getElementById('current-date').textContent = now.toLocaleDateString('en-US', options);
+        });
+    </script>
+</body>
+</html>

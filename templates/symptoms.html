@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symptoms Selection - Diagnostic System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Symptoms Selection</h1>
+            <p class="subtitle">Please select the symptoms you are currently experiencing</p>
+        </header>
+
+        <nav class="breadcrumb">
+            <a href="{{ url_for('index') }}">Home</a> > <a href="{{ url_for('medical_form') }}">Medical Form</a> > Symptoms Selection
+        </nav>
+
+        <!-- Flash messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="flash-message flash-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <form action="{{ url_for('diagnose') }}" method="POST" id="symptomsForm">
+            <!-- General Symptoms -->
+            <section class="form-section">
+                <h2>General Symptoms</h2>
+                
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="symptoms" value="fever">
+                        <span class="checkmark"></span>
+                        Fever (Temperature > 100.4°F)
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="symptoms" value="chills">
+                        <span class="checkmark"></span>
+                        Chills
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="symptoms" value="fatigue">
+                        <span class="checkmark"></span>
+                        Fatigue/Weakness
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="symptoms" value="mild_fatigue">
+                        <span class="checkmark"></span>
+                        Mild Fatigue
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="symptoms" value="headache">
+                        <span class="checkmark"></span>
+                        Headache
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="symptoms" value="body_aches">
+                        <span class="checkmark"></span>
+                        Body Aches/Muscle Pain
+                    </label>
+                </div>
+            </section>
+
+            <!-- Respiratory Symptoms -->
+            <section class="form-section">
+                <h2>Respiratory Symptoms</h2>
+                
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="symptoms" value="dry_cough">
+                        <span class="checkmark"></span>
+                        Dry Cough
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="symptoms" value="mild_cough">
+                        <span class="checkmark"></span>
+                        Mild Cough
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="symptoms" value="sore_throat">
+                        <span class="checkmark"></span>
+                        Sore Throat
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="symptoms" value="runny_nose">
+                        <span class="checkmark"></span>
+                        Runny Nose
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="symptoms" value="nasal_congestion">
+                        <span class="checkmark"></span>
+                        Nasal Congestion
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="symptoms" value="sneezing">
+                        <span class="checkmark"></span>
+                        Sneezing
+                    </label>
+                </div>
+            </section>
+
+            <!-- Digestive Symptoms -->
+            <section class="form-section">
+                <h2>Digestive Symptoms</h2>
+                
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="symptoms" value="nausea">
+                        <span class="checkmark"></span>
+                        Nausea
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="symptoms" value="vomiting">
+                        <span class="checkmark"></span>
+                        Vomiting
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="symptoms" value="diarrhea">
+                        <span class="checkmark"></span>
+                        Diarrhea
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="symptoms" value="stomach_pain">
+                        <span class="checkmark"></span>
+                        Stomach Pain
+                    </label>
+                </div>
+            </section>
+
+            <!-- Skin and Allergic Symptoms -->
+            <section class="form-section">
+                <h2>Skin and Allergic Symptoms</h2>
+                
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="symptoms" value="skin_rash">
+                        <span class="checkmark"></span>
+                        Skin Rash
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="symptoms" value="itching">
+                        <span class="checkmark"></span>
+                        Itching
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="symptoms" value="watery_eyes">
+                        <span class="checkmark"></span>
+                        Watery Eyes
+                    </label>
+                </div>
+            </section>
+
+            <div class="form-actions">
+                <button type="submit" class="submit-btn">Generate Diagnosis</button>
+                <a href="{{ url_for('medical_form') }}" class="submit-btn secondary-btn">Back to Medical Form</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Form validation
+        document.getElementById('symptomsForm').addEventListener('submit', function(e) {
+            const checkboxes = document.querySelectorAll('input[name="symptoms"]:checked');
+            
+            if (checkboxes.length === 0) {
+                e.preventDefault();
+                alert('Please select at least one symptom to continue.');
+            }
+        });
+    </script>
+</body>
+</html>

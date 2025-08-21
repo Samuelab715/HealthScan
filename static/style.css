@@ -485,6 +485,263 @@ input::placeholder {
     background-color: #5a6268;
 }
 
+/* Diagnosis page styles */
+.diagnosis-container {
+    margin-bottom: 40px;
+}
+
+.diagnosis-section {
+    margin-bottom: 30px;
+    padding: 25px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+.primary-diagnosis {
+    background-color: #f8f9ff;
+    border-color: #4a90e2;
+}
+
+.alternative-diagnosis {
+    background-color: #fff8f0;
+    border-color: #ff9500;
+}
+
+.risk-factors {
+    background-color: #fff5f5;
+    border-color: #e53e3e;
+}
+
+.symptoms-summary {
+    background-color: #f0fff4;
+    border-color: #38a169;
+}
+
+.general-recommendations {
+    background-color: #fafafa;
+    border-color: #e0e0e0;
+}
+
+.disclaimer {
+    background-color: #fffbf0;
+    border-color: #d69e2e;
+}
+
+.diagnosis-section h2 {
+    color: #333333;
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+    border-bottom: 2px solid currentColor;
+    padding-bottom: 8px;
+}
+
+.diagnosis-card {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.diagnosis-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.diagnosis-header h3 {
+    color: #333333;
+    font-size: 1.5rem;
+    margin: 0;
+    font-weight: 600;
+}
+
+.confidence-badge {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.confidence-level {
+    background-color: #4a90e2;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.severity-level {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: white;
+}
+
+.severity-mild { background-color: #38a169; }
+.severity-moderate { background-color: #ff9500; }
+.severity-severe { background-color: #e53e3e; }
+.severity-mild-to-moderate { background-color: #d69e2e; }
+
+.recommendations h4 {
+    color: #333333;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.recommendations ul {
+    list-style: none;
+    padding: 0;
+}
+
+.recommendations li {
+    padding: 8px 0;
+    padding-left: 20px;
+    position: relative;
+    color: #666666;
+    line-height: 1.6;
+}
+
+.recommendations li:before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #38a169;
+    font-weight: bold;
+}
+
+.alternatives-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+.alternative-card {
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 6px;
+    border: 1px solid #e0e0e0;
+    text-align: center;
+}
+
+.alternative-card h4 {
+    color: #333333;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.alternative-details {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.confidence-small {
+    background-color: #f0f0f0;
+    color: #666666;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+}
+
+.severity-small {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    color: white;
+}
+
+.risk-alerts {
+    space-y: 10px;
+}
+
+.risk-alert {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 6px;
+    border: 1px solid #fed7d7;
+    margin-bottom: 10px;
+}
+
+.risk-icon {
+    font-size: 1.2rem;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.risk-text {
+    color: #c53030;
+    font-weight: 500;
+}
+
+.symptoms-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.symptom-tag {
+    background-color: #38a169;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.general-advice ul {
+    list-style: none;
+    padding: 0;
+}
+
+.general-advice li {
+    padding: 8px 0;
+    padding-left: 20px;
+    position: relative;
+    color: #666666;
+    line-height: 1.6;
+}
+
+.general-advice li:before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: #4a90e2;
+    font-weight: bold;
+}
+
+.disclaimer-box {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #d69e2e;
+    text-align: center;
+}
+
+.disclaimer-box h3 {
+    color: #d69e2e;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.disclaimer-box p {
+    color: #666666;
+    line-height: 1.6;
+    margin: 0;
+}
+
 /* Print styles */
 @media print {
     body {

@@ -10,7 +10,7 @@ The system is built using **Flask (Python)** with a simple interface, a symptom 
 
 ## 👩‍💻 Group Members
 - Aboagye Samuel Boateng – 5211040649  
-- Borsuwei Matinu – 5211040648  
+- Borsuwei Alhassan Matinu – 5211040648  
 - Biyak Elijah – 5211040643  
 - Asare Emmanuella - 5211040636  
 

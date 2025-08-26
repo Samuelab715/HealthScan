@@ -9,9 +9,9 @@ The system is built using **Flask (Python)** with a simple interface, a symptom 
 ---
 
 ## 👩‍💻 Group Members
-- Samuel Aboagye – 5211040649  
+- Aboagye Samuel Boateng – 5211040649  
 - Borsuwei Matinu – 5211040648  
-- Biyak Elijah – 5211040646  
+- Biyak Elijah – 5211040643  
 - Asare Emmanuella - 5211040636  
 
 ---
@@ -28,8 +28,11 @@ The system is built using **Flask (Python)** with a simple interface, a symptom 
 ---
 
 ## 🚀 How to Run Locally
+- Double click on the run.bat file in our project folder HealthScan
+- Then enter http://127.0.0.1:5000 in your browser
 
 ### 1. Clone the Repository
 ```bash
 git clone https://github.com/Samuelab715/HealthScan.git
 cd HealthScan
+
